@@ -511,7 +511,7 @@ submitBtn.addEventListener('click', () => {
             });
         }, 1000);
     } else if (answer) {
-        hintMessage.textContent = 'Its good for pasta';
+        hintMessage.textContent = 'Not quite right, here is a hint: Its good for pasta';
         hintMessage.style.color = '#ffd700';
     } else {
         hintMessage.textContent = 'Please enter your answer!';
