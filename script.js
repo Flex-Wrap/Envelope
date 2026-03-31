@@ -94,7 +94,7 @@ class YellowPixel {
 // Add yellow pixels after 2 seconds
 const yellowPixels = [];
 let imageIndex = 0; // Track which image to use next
-const MAX_YELLOW_DOTS = 6; // 1:25 ratio with 150 white dots
+const MAX_YELLOW_DOTS = 9; // 1:25 ratio with 150 white dots
 let shouldAllDotsGrow = false; // Global flag to track if growth has been triggered
 
 // Function to spawn dots - caps at 6 total
@@ -280,10 +280,10 @@ for (let i = 0; i < 9; i++) {
     spawnMoreDots();
 }
 
-// Then spawn 1 dot every 1.5 seconds if we're below 6 loaded dots
+// Then spawn 1 dot every 1.5 seconds if we're below 9 loaded dots
 setInterval(() => {
     const loadedDots = fallingPictures.filter(pic => pic.isImageLoaded).length;
-    if (loadedDots < 6) {
+    if (loadedDots < 9) {
         spawnMoreDots();
     }
 }, 1500); // Check every 1.5 seconds
