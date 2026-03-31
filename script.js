@@ -95,11 +95,19 @@ class YellowPixel {
 const yellowPixels = [];
 let imageIndex = 0; // Track which image to use next
 const MAX_YELLOW_DOTS = 6; // 1:25 ratio with 150 white dots
+let shouldAllDotsGrow = false; // Global flag to track if growth has been triggered
 
 // Function to spawn dots - caps at 6 total
 function spawnMoreDots() {
     const randomImage = imageUrls[imageIndex % imageUrls.length];
-    fallingPictures.push(new FallingPicture(randomImage, true)); // true = startSmall
+    const newPic = new FallingPicture(randomImage, true); // true = startSmall
+    
+    // If growth has already been triggered, make the new dot grow immediately
+    if (shouldAllDotsGrow) {
+        newPic.startGrowing();
+    }
+    
+    fallingPictures.push(newPic);
     imageIndex++; // Move to next image
 }
 
@@ -227,15 +235,36 @@ class FallingPicture {
         ctx.shadowColor = `rgba(255, 255, 0, 0.8)`;
         ctx.fillRect(this.x - halfSize - 3, this.y - halfSize - 3, this.currentSize + 6, this.currentSize + 6);
 
-        // Draw image
+        // Draw image with object-fit: cover behavior (crop and center)
         ctx.globalAlpha = 1;
         ctx.shadowBlur = 0;
+        
+        const imgWidth = this.image.width;
+        const imgHeight = this.image.height;
+        const imgAspect = imgWidth / imgHeight;
+        const canvasAspect = 1; // Square
+        
+        let sourceX = 0;
+        let sourceY = 0;
+        let sourceWidth = imgWidth;
+        let sourceHeight = imgHeight;
+        
+        // Calculate crop to fill square without distortion
+        if (imgAspect > canvasAspect) {
+            // Image is wider - crop sides
+            sourceWidth = imgHeight;
+            sourceX = (imgWidth - sourceWidth) / 2;
+        } else {
+            // Image is taller - crop top/bottom
+            sourceHeight = imgWidth;
+            sourceY = (imgHeight - sourceHeight) / 2;
+        }
+        
         ctx.drawImage(
             this.image,
-            this.x - halfSize,
-            this.y - halfSize,
-            this.currentSize,
-            this.currentSize
+            sourceX, sourceY, sourceWidth, sourceHeight,
+            this.x - halfSize, this.y - halfSize,
+            this.currentSize, this.currentSize
         );
         ctx.globalAlpha = 1;
     }
@@ -439,6 +468,7 @@ submitBtn.addEventListener('click', () => {
                                 
                                 // Trigger growth of the "yellow pixel" pictures - the plot twist!
                                 setTimeout(() => {
+                                    shouldAllDotsGrow = true; // Set global flag for new dots
                                     fallingPictures.forEach(pic => {
                                         pic.startGrowing();
                                     });
