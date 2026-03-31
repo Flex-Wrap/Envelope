@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Collage</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="snowCanvas"></canvas>
+    <div id="backgroundOverlay"></div>
+    <div class="container">
+        <div class="text-and-button" id="textAndButtonSection">
+            <div class="text-display" id="textDisplay"></div>
+            <div class="next-button" id="nextButtonSection" style="display: none;">
+                <button id="nextBtn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <div class="input-section" id="inputSection" style="display: none;">
+            <input type="text" id="answerInput" placeholder="Type your answer...">
+            <button id="submitBtn">Enter</button>
+            <div class="hint-message" id="hintMessage"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

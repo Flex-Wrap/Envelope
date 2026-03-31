@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', 'Courier', monospace;
+    background: #000000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+body.dawn {
+    background: linear-gradient(180deg, #0d1b4d 0%, #1a2a5e 20%, #000000 60%, #000000 100%);
+}
+
+body.sunrise {
+    background: linear-gradient(180deg, #ffd700 0%, #f7931e 8%, #ff6b35 15%, #0c4a6e 35%, #000000 65%, #000000 100%);
+}
+
+body.final {
+    background: linear-gradient(180deg, #ffed4e 0%, #ffc93d 10%, #ff9500 20%, #ff7f50 30%, #1a4d7a 45%, #0d2d4a 70%, #050a15 100%);
+}
+
+#snowCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+#backgroundOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 3s ease;
+    z-index: -1;
+}
+
+.container {
+    max-width: 500px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.text-and-button {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.text-display {
+    font-size: 28px;
+    color: white;
+    line-height: 1.8;
+    min-height: 200px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: left;
+    flex: 1;
+    padding: 10px 0;
+}
+
+.text-display.fade-out {
+    animation: fadeOut 1s ease-in-out forwards;
+}
+
+.text-display.fade-in {
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.next-button {
+    animation: fadeIn 0.8s ease-in-out;
+    flex-shrink: 0;
+    align-self: flex-end;
+}
+
+#nextBtn {
+    padding: 15px 20px;
+    font-size: 24px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#nextBtn:hover {
+    background: #ffd700;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+#nextBtn:active {
+    transform: scale(0.95);
+}
+
+.input-section {
+    animation: fadeIn 0.8s ease-in-out;
+    text-align: center;
+}
+
+#answerInput {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid white;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+#answerInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+#answerInput:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #ffd700;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+#submitBtn {
+    padding: 12px 40px;
+    font-size: 18px;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+#submitBtn:hover {
+    background: #ffd700;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+#submitBtn:active {
+    transform: scale(0.98);
+}
+
+.hint-message {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #ffd700;
+    min-height: 40px;
+    line-height: 1.5;
+}
+
+.glowing-text {
+    color: #ffff00;
+    text-shadow: 0 0 10px rgba(255, 255, 0, 0.8), 0 0 20px rgba(255, 255, 0, 0.6);
+    font-weight: bold;
+    display: inline;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .text-display {
+        font-size: 22px;
+    }
+
+    #answerInput,
+    #submitBtn {
+        font-size: 16px;
+    }
+}
