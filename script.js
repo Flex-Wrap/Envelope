@@ -8,6 +8,7 @@ canvas.height = window.innerHeight;
 // Audio setup
 const backgroundAudio = new Audio('sound/New Recording 153.mp3');
 backgroundAudio.loop = true;
+backgroundAudio.volume = 0.3; // 30% volume
 let audioStarted = false; // Flag to track if audio has been started
 let isMuted = false; // Track mute state
 
