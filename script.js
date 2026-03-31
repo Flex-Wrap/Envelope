@@ -358,7 +358,7 @@ const submitBtn = document.getElementById('submitBtn');
 const hintMessage = document.getElementById('hintMessage');
 
 const textSequence = [
-    "Hey, glad you clicked the link in the pdf! I didn't include this the email because I didn't want you to see it until after you read the letter.",
+    "Hey, glad you clicked the link in the pdf! I didn't include this in the email because I didn't want you to see it until after you read the letter.",
     "I know its silly but I added a step to make sure it is you, its a small riddle",
     "What is a million dollar idea that people are sleeping on?"
 ];
