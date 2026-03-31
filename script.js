@@ -164,7 +164,9 @@ class FallingPicture {
         this.speedY = Math.random() * 0.15 + 0.05;
         this.speedX = (Math.random() - 0.5) * 0.15;
         this.minSize = startSmall ? (Math.random() * 2 + 3) : 8; // 3-5px when small, 8px cap at top
-        this.maxBaseSize = canvas.width * 0.15; // 15vw max at bottom
+        // 30vw on mobile (<768px), 15vw on desktop
+        const isMobile = window.innerWidth < 768;
+        this.maxBaseSize = canvas.width * (isMobile ? 0.3 : 0.15);
         this.currentSize = this.minSize;
         this.image = new Image();
         this.isImageLoaded = false; // Flag for handshake - raised when image loads
