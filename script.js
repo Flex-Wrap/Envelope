@@ -9,6 +9,7 @@ canvas.height = window.innerHeight;
 const backgroundAudio = new Audio('sound/Julia.mp3');
 backgroundAudio.loop = true;
 let audioStarted = false; // Flag to track if audio has been started
+let isMuted = false; // Track mute state
 
 function startAudioOnFirstInteraction() {
     if (!audioStarted) {
@@ -16,6 +17,21 @@ function startAudioOnFirstInteraction() {
         audioStarted = true;
     }
 }
+
+// Mute button functionality
+const muteBtn = document.getElementById('muteBtn');
+muteBtn.addEventListener('click', () => {
+    isMuted = !isMuted;
+    if (isMuted) {
+        backgroundAudio.muted = true;
+        muteBtn.classList.add('muted');
+        muteBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else {
+        backgroundAudio.muted = false;
+        muteBtn.classList.remove('muted');
+        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+});
 
 const snowflakes = [];
 const snowflakeCount = 150;
