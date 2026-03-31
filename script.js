@@ -5,6 +5,18 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+// Audio setup
+const backgroundAudio = new Audio('sound/Julia.mp3');
+backgroundAudio.loop = true;
+let audioStarted = false; // Flag to track if audio has been started
+
+function startAudioOnFirstInteraction() {
+    if (!audioStarted) {
+        backgroundAudio.play().catch(err => console.log('Audio play failed:', err));
+        audioStarted = true;
+    }
+}
+
 const snowflakes = [];
 const snowflakeCount = 150;
 const pixelSize = 2;
@@ -369,6 +381,7 @@ function hideNextButton() {
 
 // Fade out and transition
 function fadeAndNext() {
+    startAudioOnFirstInteraction(); // Start audio on first button click
     textDisplay.classList.add('fade-out');
     
     // Handle background transitions with smooth fade
@@ -428,6 +441,7 @@ nextBtn.addEventListener('click', fadeAndNext);
 
 // Handle submit button click
 submitBtn.addEventListener('click', () => {
+    startAudioOnFirstInteraction(); // Start audio on first button click
     const answer = answerInput.value.trim().toLowerCase();
     if (answer === 'salt cubes') {
         console.log('Correct answer!');
